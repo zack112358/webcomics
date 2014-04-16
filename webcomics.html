@@ -156,6 +156,13 @@ body {
         }
     }
 
+    // Change the page location to a data URL containing this page
+    var redirect_into_data = webcomics.redirect_into_data = function() {
+        // Throw away pages because they'll be re-created
+        document.getElementById('pages').innerHTML = '';
+        window.location = node_uri(document.documentElement);
+    }
+
     setTimeout(initialize, 0);
 })();
 
