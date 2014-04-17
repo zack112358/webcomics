@@ -197,7 +197,7 @@ form {
             </div>
         </div>
 
-        <div class=hide id="preloads" data-json='[{"url": "gmail.com"}, {"url": "xkcd.com", "height": "685px"}, {"url": "basicinstructions.net", "height": "676px"}]' />
+        <div class=hide id="preloads" data-json='[{"url": "http://m.wund.com/cgi-bin/findweather/getForecast?brand=mobile&query=02143#forecast"}, {"url": "xkcd.com", "height": "685px"}, {"url": "basicinstructions.net", "height": "676px"}]' />
 
         <script type="text/javascript">
             
@@ -211,7 +211,7 @@ form {
     /* Event handler for add-page button */
     var add_page_handler = function(ev) {
         url_input = document.getElementById('add-page-url');
-        webcomics.add_page({'url': url_input.value, 'height': '800px'});
+        webcomics.add_page({'url': url_input.value});
         url_input.value = '';
         ev.preventDefault();
         return false;
@@ -263,7 +263,10 @@ form {
         webcomics.pages_root.appendChild(page);
 
         page_iframe = document.querySelector('#' + id + ' .page-iframe');
-        url = params.url.replace(/http:\/\/|^/, "http://");
+        url = params.url;
+        if (!url.match(':')) {
+            url = 'http://' + url;
+        }
         page_iframe.setAttribute('src', url);
 
         page_iframe_container = 
@@ -275,6 +278,8 @@ form {
         $(page).resizable({'handles': 's'});
         if (params.height) {
             page.style.height = params.height;
+        } else {
+            page.style.height = "800px";
         }
     };
 
