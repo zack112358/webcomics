@@ -1,4 +1,0 @@
-webcomics
-=========
-
-Webcomics page
